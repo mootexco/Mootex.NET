@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>Copyright (C) 2020 Jose J. Fernández</Copyright>
+        <Authors>Jose J. Fernández</Authors>
+        <Company>Mootex</Company>
+        <Version>0.1.0-dev</Version>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RepositoryUrl>https://github.com/mootexco/Mootex.NET</RepositoryUrl>
+        <Description>An implementation of the Blake2 hashing algorithm, based on the Blake2 team's.</Description>
+        <PackageProjectUrl>https://github.com/mootexco/Mootex.NET</PackageProjectUrl>
+        <PackageIcon>logo.png</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Mootex.Hashing\Mootex.Hashing.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Include="..\..\logo.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>

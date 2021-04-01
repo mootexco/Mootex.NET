@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>Copyright (C) 2020 Jose J. Fernández</Copyright>
+        <Authors>Jose J. Fernández</Authors>
+        <Company>Mootex</Company>
+        <Version>0.1.0-dev</Version>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RepositoryUrl>https://github.com/mootexco/Mootex.NET</RepositoryUrl>
+        <Description>A set of helpers for many .NET hashing algorithms: MD5, SHA1, SHA2 and PBKDF2 (RFC 2898), including the HMAC variants.</Description>
+        <PackageProjectUrl>https://github.com/mootexco/Mootex.NET</PackageProjectUrl>
+        <PackageIcon>logo.png</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Include="..\..\logo.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>

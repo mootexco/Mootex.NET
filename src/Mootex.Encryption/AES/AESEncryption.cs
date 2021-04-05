@@ -6,31 +6,37 @@ namespace Mootex.Encryption.AES {
 
     public sealed class AESEncryption {
 
-        /*
-         * CipherMode = CBC
-         * KeySize = 256 bits, 32 bytes
-         * IV length = 128 bits, 16 bytes
-         */
+        public static byte[] Encrypt(string data, byte[] key, byte[] iv) {
 
-        public byte[] Encrypt(string data, byte[] key, byte[] iv) {
-
-            if (data == null || data.Length <= 0) {
+            if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (key == null || key.Length < 32) {
+            if (data.Length <= 0) {
+                throw new ArgumentException("Invalid data length.", nameof(data));
+            }
+
+            if (key == null) {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            if (iv == null || iv.Length < 16) {
+            if (!CheckKey(key)) {
+                throw new ArgumentException("Invalid key length.", nameof(key));
+            }
+
+            if (iv == null) {
                 throw new ArgumentNullException(nameof(iv));
+            }
+
+            if (iv.Length != 16) {
+                throw new ArgumentException("Invalid iv length.", nameof(iv));
             }
 
             byte[] encrypted;
 
-            using (AesManaged aesAlg = new AesManaged() { Key = key, IV = iv }) {
+            using (Aes aes = Create(key, iv)) {
 
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using (MemoryStream msEncrypt = new MemoryStream()) {
                     using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write)) {
@@ -47,25 +53,37 @@ namespace Mootex.Encryption.AES {
 
         }
 
-        public string Decrypt(byte[] data, byte[] key, byte[] iv) {
+        public static string Decrypt(byte[] data, byte[] key, byte[] iv) {
 
-            if (data == null || data.Length <= 0) {
+            if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            if (key == null || key.Length <= 0) {
+            if (data.Length <= 0) {
+                throw new ArgumentException("Invalid data length.", nameof(data));
+            }
+
+            if (key == null) {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            if (iv == null || iv.Length <= 0) {
+            if (!CheckKey(key)) {
+                throw new ArgumentException("Invalid key length.", nameof(key));
+            }
+
+            if (iv == null) {
                 throw new ArgumentNullException(nameof(iv));
+            }
+
+            if (iv.Length != 16) {
+                throw new ArgumentException("Invalid iv length.", nameof(iv));
             }
 
             string plaintext = string.Empty;
 
-            using (AesManaged aesAlg = new AesManaged() { Key = key, IV = iv }) {
+            using (Aes aes = Create(key, iv)) {
 
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                 using (MemoryStream msDecrypt = new MemoryStream(data)) {
                     using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read)) {
@@ -74,10 +92,26 @@ namespace Mootex.Encryption.AES {
                         }
                     }
                 }
+
             }
 
             return plaintext;
 
+        }
+
+        private static Aes Create(byte[] key, byte[] iv) {
+
+            Aes aes = Aes.Create();
+            aes.Mode = CipherMode.CBC;
+            aes.Key = key;
+            aes.IV = iv;
+
+            return aes;
+
+        }
+
+        private static bool CheckKey(byte[] key) {
+            return Aes.Create().ValidKeySize(key.Length * 8);
         }
 
     }

@@ -1,6 +1,6 @@
 # Mootex.NET
 
-[![License](https://img.shields.io/github/license/mootexco/Mootex.Auth)](https://github.com/mootexco/Mootex.Auth/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/mootexco/Mootex.NET)](https://github.com/mootexco/Mootex.NET/blob/main/LICENSE)
 
 A set of libraries and helpers for .NET software.
 

@@ -6,7 +6,7 @@
         <Copyright>Copyright (C) 2020 Jose J. Fernández</Copyright>
         <Authors>Jose J. Fernández</Authors>
         <Company>Mootex</Company>
-        <Version>0.1.1-dev</Version>
+        <Version>0.1.2-dev</Version>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IncludeSymbols>true</IncludeSymbols>
